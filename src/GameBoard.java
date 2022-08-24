@@ -132,7 +132,7 @@ public class GameBoard {
             StringBuilder composer = composedOutput;
             composer.append("    ");
             for(int i = 0; i < arrayLength; i++){
-                    composer.append(i+"  ");
+                    composer.append((i+1) + "  ");
 
             }
         }
