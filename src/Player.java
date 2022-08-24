@@ -1,6 +1,5 @@
 public class Player {
     Boat[] availableBoats;
-    Boat[] gesetzteBoote;
     BoatPart[][] ownArea;
     String name;
     Player(Boat[] pSpielerboote, BoatPart[][] pSpielergebiet) {
@@ -26,6 +25,8 @@ public class Player {
         name = pName;
 
     }
+
+    //OPTIMIZE RUNTIME
     public boolean haveILost(){
         int lostShips = 0;
         for(int i = 0; i< availableBoats.length; i++){

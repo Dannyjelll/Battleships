@@ -69,14 +69,7 @@ public class Computer {
         return new Randoms(coords, direction);
     }
 
-    public BoatPart[][] shootRandom(BoatPart[][] pTable) {
-        BoatPart[][] table = pTable.clone();
-        Randoms numbers = generateRandomCords();
-        table[numbers.getCoords()[0]][numbers.getCoords()[1]].setDestroyed();
 
-
-        return table;
-    }
 
     public boolean haveILost() {
         int lostShips = 0;
@@ -85,11 +78,7 @@ public class Computer {
                 lostShips++;
             }
         }
-        if (lostShips == availableBoats.length) {
-
-            return true;
-        }
-        return false;
+        return lostShips == availableBoats.length;
     }
 
 }

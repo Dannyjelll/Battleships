@@ -19,6 +19,7 @@ class Boat {
 
     }
 
+    //OPIMIZE RUNTIME -damaged counter
     public boolean isDestroyed() {
         int damaged = 0; // int damaged counts how many parts have been damaged
         for (int i = 0; i < size; i++) {
