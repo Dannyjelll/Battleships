@@ -48,7 +48,7 @@ public class GameManager {
     //endofGame() Ends the game. Displays who has won, and offers a toast.
     public void endofGame() {
         if (didSomeoneLoose() == 2) {
-            System.out.println("Congratulastions" + ply.name + " you have defeated the enemy fleet!");
+            System.out.println("Congratulastions commander " + ply.name + ", you have defeated the enemy fleet!");
 
         } else {
             System.out.println("CPU has won");
@@ -73,6 +73,7 @@ public class GameManager {
     public void gameStep() {
         PlayersTurn();
         dumbComputerTurn();
+        sleepInSeconds(2);
         printGameInfo();
     }
 
