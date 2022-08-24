@@ -128,6 +128,7 @@ public class GameManager {
         boolean check;
         do {
             check = false;
+            coordinates = cpu.generateRandomCords().getCoords();
             if (ply.eigenesGebiet[coordinates[0]][coordinates[1]].isDestroyed()) {
                 check = true;
             }
