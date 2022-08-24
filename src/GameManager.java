@@ -279,14 +279,14 @@ public class GameManager {
                 try {
                     do {
                         PlacementCoords[0] = numReader.nextInt() - 1;
-                        if (PlacementCoords[0] > boardLength || PlacementCoords[0] < 0) {
+                        if (PlacementCoords[0] >= boardLength || PlacementCoords[0] < 0) {
                             System.out.println("Invalid coordinate. Xcoord needs to be between 1 and " + boardLength);
                             System.out.print("First, the X coordinate: ");
                             PlacementCoords[0] = numReader.nextInt() - 1;
 
 
                         }
-                    } while (PlacementCoords[0] > boardLength || PlacementCoords[0] < 0);
+                    } while (PlacementCoords[0] >= boardLength || PlacementCoords[0] < 0);
                 } catch (InputMismatchException e) {
                     System.out.println("Please input a Number, not anything else!");
                     numReader.next();
@@ -298,14 +298,14 @@ public class GameManager {
                 try {
                     do {
                         PlacementCoords[1] = numReader.nextInt() - 1;
-                        if (PlacementCoords[1] > boardWidth || PlacementCoords[1] < 0) {
+                        if (PlacementCoords[1] >= boardWidth || PlacementCoords[1] < 0) {
                             System.out.println("Invalid coordinate. Ycoord needs to be between 1 and " + boardLength);
                             System.out.print("Now, the Y coordinate: ");
                             PlacementCoords[1] = numReader.nextInt() - 1;
 
 
                         }
-                    } while (PlacementCoords[1] > boardWidth || PlacementCoords[1] < 0);
+                    } while (PlacementCoords[1] >= boardWidth || PlacementCoords[1] < 0);
                 } catch (InputMismatchException e) {
                     System.out.println("Please input a Number, not anything else!");
                     numReader.next();
