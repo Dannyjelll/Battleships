@@ -1,6 +1,7 @@
 // The Game Manager is the Class that manages the actual flow of the game. It owns and manages instances of pretty much all other classes under shortened Names (cpu, ply, gb, sb, etc..)
 //
 
+import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -33,8 +34,7 @@ public class GameManager {
         cpu = new Computer(initiateBoats(), gb.makeNewBoard());
         ply = new Player(initiateBoats(), gb.makeNewBoard());
         usr = new UserResponseField(gb.makeNewBoard());
-        initiateGame();
-        gameLoop();
+
     }
 
 
@@ -120,18 +120,18 @@ public class GameManager {
 
     //dumbComputerTurn() Computer shoots a random location, thats why the method has "dumb" in its name
     public void dumbComputerTurn() {
-        int[] coords = cpu.generateRandomCords().getCoords();
+        int[] coordinates = cpu.generateRandomCords().getCoords();
         boolean check;
         do {
             check = false;
-            if (ply.eigenesGebiet[coords[0]][coords[1]].isDestroyed()) {
+            if (ply.eigenesGebiet[coordinates[0]][coordinates[1]].isDestroyed()) {
                 check = true;
             }
         } while (check);
 
-        ply.eigenesGebiet[coords[0]][coords[1]].setDestroyed();
+        ply.eigenesGebiet[coordinates[0]][coordinates[1]].setDestroyed();
 
-        if (!ply.eigenesGebiet[coords[0]][coords[1]].getType().equals("Water")) {
+        if (!ply.eigenesGebiet[coordinates[0]][coordinates[1]].getType().equals("Water")) {
             System.out.println("Computer Scored a hit!");
 
         } else {
@@ -371,11 +371,14 @@ public class GameManager {
 
     public static void clearScreen() {
         try {
-
-            Runtime.getRuntime().exec("cls");
-
-        } catch (final Exception e) {
-            //  Handle any exceptions.
+            if (System.getProperty("os.name").contains("Windows"))
+                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+            else
+                Runtime.getRuntime().exec("clear");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
         }
     }
 
