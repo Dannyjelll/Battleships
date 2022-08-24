@@ -5,21 +5,21 @@ public class Computer {
      */
 
     BoardManager creator = new BoardManager();
-    Boat[] verfügbareBoote;
-    BoatPart[][] eigenesGebiet;
+    Boat[] availableBoats;
+    BoatPart[][] ownArea;
     int length;
     int width;
 
     Computer(Boat[] pSpielerboote, BoatPart[][] pComputergebiet) {
-        verfügbareBoote = pSpielerboote;
-        eigenesGebiet = pComputergebiet;
+        availableBoats = pSpielerboote;
+        ownArea = pComputergebiet;
         length = pComputergebiet.length - 1;
         width = pComputergebiet.length - 1;
     }
 
 
     public BoatPart[][] getOwnArea() {
-        return eigenesGebiet;
+        return ownArea;
     }
 
 
@@ -27,22 +27,22 @@ public class Computer {
      * This Method generates random placement ideas for the computer, checks if they are valid and then places them. In the End, the instance Variable of the Object is overwritten.
      */
     public void placeOwnBoats() {
-        BoatPart[][] output = eigenesGebiet.clone();
-        for (int i = 0; i < verfügbareBoote.length; i++) {
+        BoatPart[][] output = ownArea.clone();
+        for (int i = 0; i < availableBoats.length; i++) {
 
             Randoms container = generateRandomCords();
 
-            while (!creator.canPlaceBoat(container.getCoords(), container.getDirection(), verfügbareBoote[i].getSize(), output)) {   //
+            while (!creator.canPlaceBoat(container.getCoords(), container.getDirection(), availableBoats[i].getSize(), output)) {   //
                 container = generateRandomCords();
 
             }
 
-            output = creator.placeBoat(container.getCoords(), container.getDirection(), verfügbareBoote[i], output);
+            output = creator.placeBoat(container.getCoords(), container.getDirection(), availableBoats[i], output);
 
         }
 
 
-        this.eigenesGebiet = output;
+        this.ownArea = output;
     }
 
 
@@ -80,12 +80,12 @@ public class Computer {
 
     public boolean haveILost() {
         int lostShips = 0;
-        for (int i = 0; i < verfügbareBoote.length; i++) {
-            if (verfügbareBoote[i].isDestroyed()) {
+        for (int i = 0; i < availableBoats.length; i++) {
+            if (availableBoats[i].isDestroyed()) {
                 lostShips++;
             }
         }
-        if (lostShips == verfügbareBoote.length) {
+        if (lostShips == availableBoats.length) {
 
             return true;
         }

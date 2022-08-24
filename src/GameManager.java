@@ -83,7 +83,7 @@ public class GameManager {
     //printGameInfo() prints out both the Board of the Player ply and the Computer cpu
     public void printGameInfo() {
         System.out.println("Your territory:");
-        System.out.println(gb.BoardToString(ply.eigenesGebiet, colourMode));
+        System.out.println(gb.BoardToString(ply.ownArea, colourMode));
         System.out.println("Enemy Territory: \n");
         System.out.println(gb.BoardToString(usr.displayField, colourMode));
 
@@ -129,14 +129,14 @@ public class GameManager {
         do {
             check = false;
             coordinates = cpu.generateRandomCords().getCoords();
-            if (ply.eigenesGebiet[coordinates[0]][coordinates[1]].isDestroyed()) {
+            if (ply.ownArea[coordinates[0]][coordinates[1]].isDestroyed()) {
                 check = true;
             }
         } while (check);
 
-        ply.eigenesGebiet[coordinates[0]][coordinates[1]].setDestroyed();
+        ply.ownArea[coordinates[0]][coordinates[1]].setDestroyed();
 
-        if (!ply.eigenesGebiet[coordinates[0]][coordinates[1]].getType().equals("Water")) {
+        if (!ply.ownArea[coordinates[0]][coordinates[1]].getType().equals("Water")) {
             System.out.println("Computer Scored a hit!");
 
         } else {
@@ -186,17 +186,17 @@ public class GameManager {
         do {
             checkIfAlreadyShot = false;
             coordsToBeShot = playerCoordInput();
-            if (cpu.eigenesGebiet[coordsToBeShot[0]][coordsToBeShot[1]].isDestroyed()) {
+            if (cpu.ownArea[coordsToBeShot[0]][coordsToBeShot[1]].isDestroyed()) {
                 checkIfAlreadyShot = true;
                 System.out.println("You Have already shot that Tile!");
             }
         } while (checkIfAlreadyShot);
 
-        cpu.eigenesGebiet[coordsToBeShot[0]][coordsToBeShot[1]].setDestroyed();
+        cpu.ownArea[coordsToBeShot[0]][coordsToBeShot[1]].setDestroyed();
         usr.displayField[coordsToBeShot[0]][coordsToBeShot[1]].setDestroyed();
-        if (cpu.eigenesGebiet[coordsToBeShot[0]][coordsToBeShot[1]].getType() != "Water") {
+        if (cpu.ownArea[coordsToBeShot[0]][coordsToBeShot[1]].getType() != "Water") {
             System.out.println("Thats a hit!");
-            usr.displayField[coordsToBeShot[0]][coordsToBeShot[1]].setType(cpu.eigenesGebiet[coordsToBeShot[0]][coordsToBeShot[1]].getType());
+            usr.displayField[coordsToBeShot[0]][coordsToBeShot[1]].setType(cpu.ownArea[coordsToBeShot[0]][coordsToBeShot[1]].getType());
         } else {
             System.out.println("Thats a miss....");
         }
@@ -252,10 +252,10 @@ public class GameManager {
 
     // letPlayerPlaceBoats() manages the placement of the players boats. it iterates through all available boats and calls the playerPlaceABoat method for each one.
     public void letPlayerPlaceBoats() {
-        for (int i = 0; i < ply.verfügbareBoote.length; i++) {
+        for (int i = 0; i < ply.availableBoats.length; i++) {
 
-            playerPlaceABoat(ply.verfügbareBoote[i]);
-            if (i < ply.verfügbareBoote.length - 1) {
+            playerPlaceABoat(ply.availableBoats[i]);
+            if (i < ply.availableBoats.length - 1) {
                 System.out.println("\n \n Continuing With your next Boat... ");
             }
             clearScreen();
@@ -348,7 +348,7 @@ public class GameManager {
                 PlacementCoords[1] = -1;
             }
         } while (fail);
-        ply.eigenesGebiet = usr.displayField.clone();
+        ply.ownArea = usr.displayField.clone();
     }
 
     //initiateGame(), sets up 2 arrays, one for CPU one for Player, then executes playerDeployShips()

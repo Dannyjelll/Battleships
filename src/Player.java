@@ -1,20 +1,20 @@
 public class Player {
-    Boat[] verfügbareBoote;
+    Boat[] availableBoats;
     Boat[] gesetzteBoote;
-    BoatPart[][] eigenesGebiet;
+    BoatPart[][] ownArea;
     String name;
     Player(Boat[] pSpielerboote, BoatPart[][] pSpielergebiet) {
-        verfügbareBoote = pSpielerboote;
-        eigenesGebiet = pSpielergebiet;
+        availableBoats = pSpielerboote;
+        ownArea = pSpielergebiet;
     }
 
     public Boat[] getAvailableBoats() {
 
-        return verfügbareBoote;
+        return availableBoats;
     }
 
     public BoatPart[][] getOwnArea() {
-        return eigenesGebiet;
+        return ownArea;
     }
     public String getName(){
         if(name.isEmpty()){
@@ -28,12 +28,12 @@ public class Player {
     }
     public boolean haveILost(){
         int lostShips = 0;
-        for(int i = 0; i< verfügbareBoote.length; i++){
-            if(verfügbareBoote[i].isDestroyed()){
+        for(int i = 0; i< availableBoats.length; i++){
+            if(availableBoats[i].isDestroyed()){
                 lostShips++;
             }
         }
-        if(lostShips == verfügbareBoote.length){
+        if(lostShips == availableBoats.length){
 
             return true;
         }
