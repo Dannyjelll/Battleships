@@ -54,13 +54,19 @@ public class GameBoard {
 
     public String NoColourBoardToString(BoatPart[][] pBoard) {
         StringBuilder composedOutput = new StringBuilder();
-
+        buildFirstLineNumbers(composedOutput, pBoard[0].length);
 
         for (int i = 0; i < x; i++) {   //Outer Loop Iterates through lines
             composedOutput.append("\n");
 
             //new Line Break after every x fields
+            if(i <9) {                 //This fixes a line shift when the number becomes one with 2 digits
+                composedOutput.append("\n" + (i + 1) + "  ");
+            }
+            else{
+                composedOutput.append("\n" + (i + 1) + " ");
 
+            }
 
             for (int j = 0; j < y; j++) {   //Inner Loop Iterates through columns
 
