@@ -201,7 +201,7 @@ public class GameManager {
 
     //playerCoordInput() lets the User input an x and y coordinate, then returns both in the form of an int array. Index 0 is x, index 1 is y.
     public int[] playerCoordInput() {
-        scanner.next();
+
         System.out.print("First, The X-Coordinate:");
         int[] PlacementCoords = new int[]{-1, -1};
         while (PlacementCoords[0] == -1) {
