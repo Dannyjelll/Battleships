@@ -122,13 +122,26 @@ public class GameBoard {
         return NoColourBoardToString(pBoard);
         }
 
+        public void buildFirstLineNumbers(StringBuilder composedOutput, int arrayLength){
+            StringBuilder composer = composedOutput;
+            composer.append("    ");
+            for(int i = 0; i < arrayLength; i++){
+                    composer.append(i+"  ");
+
+            }
+        }
     public String BoardToStringColour(BoatPart[][] pBoard) {
         StringBuilder composedOutput = new StringBuilder();
-
-
+        buildFirstLineNumbers(composedOutput, pBoard[0].length);
         for (int i = 0; i < x; i++) {   //Outer Loop Iterates through lines
-            composedOutput.append("\n");
 
+            if(i <9) {                 //This fixes a line shift when the number becomes one with 2 digits
+                composedOutput.append("\n" + (i + 1) + "  ");
+            }
+            else{
+                composedOutput.append("\n" + (i + 1) + " ");
+
+            }
             //new Line Break after every x fields
 
 
