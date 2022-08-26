@@ -19,9 +19,9 @@ public class GameManager {
     public Scanner scanner;
     public Scanner numReader;
 
-    public final int[] whichBoats = {2,2,3}; //Specify which boat types should be in the game.Default : 1x2, 1x3, 1x4, 1x5
-    public final int boardLength = 4;  //Size of the board x-axis
-    public final int boardWidth = 4; //Size of the board y-axis
+    public final int[] whichBoats = {2,3,4,5}; //Specify which boat types should be in the game.Default : 1x2, 1x3, 1x4, 1x5
+    public final int boardLength = 10;  //Size of the board x-axis
+    public final int boardWidth = 10; //Size of the board y-axis
 
     public final boolean colourMode = true;  //Switch between using ASCII escape colours or not
 
