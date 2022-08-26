@@ -110,7 +110,7 @@ public class GameManager {
         printLegend();
         cpu.placeOwnBoats();
         //TESTING CHEAT
-        System.out.println(gb.BoardToString(cpu.getOwnArea(), colourMode));
+      //  System.out.println(gb.BoardToString(cpu.getOwnArea(), colourMode));
         //TESTING CHEAT
         System.out.print("Enter your Name to start! \n" + "Your Name:");
         ply.setName(scanner.next());

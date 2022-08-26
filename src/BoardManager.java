@@ -97,7 +97,7 @@ public class BoardManager {
 
             switch (Direction) {
                 case "North" -> {
-                    System.out.println("Coord: " + pCoords[0] + " " + pCoords[1] + ", Direction:" + Direction + " Boat Size: " + pBoat.getSize());
+
                     for (int i = 0; i < pBoat.getSize(); i++) {
 
                         tempBoard[pCoords[0] - i][pCoords[1]] = pBoat.getParts()[i];
@@ -106,7 +106,7 @@ public class BoardManager {
                     return tempBoard;
                 }
                 case "South" -> {
-                    System.out.println("Coord: " + pCoords[0] + " " + pCoords[1] + ", Direction:" + Direction + " Boat Size: " + pBoat.getSize());
+
                     for (int i = 0; i < pBoat.getSize(); i++) {
                         tempBoard[pCoords[0] + i][pCoords[1]] = pBoat.getParts()[i];
 
@@ -114,7 +114,7 @@ public class BoardManager {
                     return tempBoard;
                 }
                 case "West" -> {
-                    System.out.println("Coord: " + pCoords[0] + " " + pCoords[1] + ", Direction:" + Direction + " Boat Size: " + pBoat.getSize());
+
                     for (int i = 0; i < pBoat.getSize(); i++) {
 
                         tempBoard[pCoords[0]][pCoords[1] - i] = pBoat.getParts()[i];
@@ -123,7 +123,7 @@ public class BoardManager {
                     return tempBoard;
                 }
                 case "East" -> {
-                    System.out.println("Coord: " + pCoords[0] + " " + pCoords[1] + ", Direction:" + Direction + " Boat Size: " + pBoat.getSize());
+
                     for (int i = 0; i < pBoat.getSize(); i++) {
                         tempBoard[pCoords[0]][pCoords[1] + i] = pBoat.getParts()[i];
 
