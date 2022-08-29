@@ -18,13 +18,15 @@ public class GameManager {
 
     public Scanner scanner;
     public Scanner numReader;
-
-    public final int[] whichBoats = {2,3,4,5}; //Specify which boat types should be in the game.Default : 1x2, 1x3, 1x4, 1x5
+    public int numberOfTurns;
+    public final int[] whichBoats = {2}; //Specify which boat types should be in the game.Default : 1x2, 1x3, 1x4, 1x5
     public final int boardLength = 10;  //Size of the board x-axis
     public final int boardWidth = 10; //Size of the board y-axis
 
+    public final boolean enableWinnersLogs = false;
     public final boolean colourMode = true;  //Switch between using ASCII escape colours or not
 
+    public MongoManager mgm ;
     GameManager() {
         scanner = new Scanner(System.in);
         numReader = new Scanner(System.in);
@@ -34,21 +36,42 @@ public class GameManager {
         cpu = new Computer(initiateBoats(), gb.makeNewBoard());
         ply = new Player(initiateBoats(), gb.makeNewBoard());
         usr = new UserResponseField(gb.makeNewBoard());
-
+        numberOfTurns = 0;
+        mgm = new MongoManager();
     }
 
 
     public void gameLoop() {
         while (didSomeoneLoose() == 3) {
             gameStep();
+            numberOfTurns++;
         }
         endofGame();
     }
 
     //endofGame() Ends the game. Displays who has won, and offers a toast.
+
+   public void wait2secondswithdotsoutput(){
+       for(int i = 0; i<4;i++){
+           sleepInSeconds(0.6);
+           System.out.print(".");
+       }
+
+   }
+
+
     public void endofGame() {
         if (didSomeoneLoose() == 2) {
             System.out.println("Congratulastions commander " + ply.name + ", you have defeated the enemy fleet!");
+            System.out.println("Do you want to add your Score to the Leaderboard? Y/N :");
+            if(scanner.next().equalsIgnoreCase("Y")){
+                mgm.addNewWinner(ply.name, numberOfTurns);
+                System.out.print("OK, adding you to the Board, please wait!");
+                wait2secondswithdotsoutput();
+                System.out.println();
+                System.out.println("Added you to the Leaderboard! Here is the updated one:");
+                System.out.println(mgm.getPastWinners());
+            }
 
         } else {
             System.out.println("CPU has won");
@@ -108,9 +131,10 @@ public class GameManager {
         );
 
         printLegend();
+        System.out.println(mgm.getPastWinners());
         cpu.placeOwnBoats();
         //TESTING CHEAT
-      //  System.out.println(gb.BoardToString(cpu.getOwnArea(), colourMode));
+        System.out.println(gb.BoardToString(cpu.getOwnArea(), colourMode));
         //TESTING CHEAT
         System.out.print("Enter your Name to start! \n" + "Your Name:");
         ply.setName(scanner.next());
@@ -387,11 +411,11 @@ public class GameManager {
         }
     }
 
-    public void sleepInSeconds(int time) {
-        int timeSeconds = time * 1000;
+    public void sleepInSeconds(double time) {
+        double timeSeconds = time * 1000;
 
         try {
-            Thread.sleep(timeSeconds);
+            Thread.sleep((long)timeSeconds);
         } catch (IllegalArgumentException | InterruptedException e) {
             System.out.println("Invalid Time");
 
